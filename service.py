@@ -24,9 +24,9 @@ def No_api_key():
 @app.route('/targets', methods=["GET", "POST"])
 def targets():
     if request.method=='GET':
-        given_api_key=request.args.get('api_key', None)
+        given_api_key=request.args.get('api_read_key', None)
 
-        if given_api_key and given_api_key==config['api_key']:
+        if given_api_key and given_api_key==config['api_read_key']:
             target_id=request.args.get('target_id', None)
             if target_id:
                 target_info=get_db().get_target_info(target_id)
