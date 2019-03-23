@@ -27,9 +27,9 @@ def targets():
         given_api_key=request.args.get('api_key', None)
 
         if given_api_key and given_api_key==config['api_read_key']:
-            target_id=request.args.get('target_id', None)
-            if target_id:
-                target_info=get_db().get_target_info(target_id)
+            target=request.args.get('target', None)
+            if target:
+                target_info=get_db().get_target_info(target)
                 if target_info:
                     return Ok(target_info)
                 else:
