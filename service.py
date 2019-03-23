@@ -24,7 +24,7 @@ def No_api_key():
 @app.route('/targets', methods=["GET", "POST"])
 def targets():
     if request.method=='GET':
-        given_api_key=request.args.get('api_read_key', None)
+        given_api_key=request.args.get('api_key', None)
 
         if given_api_key and given_api_key==config['api_read_key']:
             target_id=request.args.get('target_id', None)
@@ -36,6 +36,13 @@ def targets():
                     return Not_found()
             else:
                 return Ok(get_db().get_all_targets())
+        else:
+            return No_api_key()
+    else:
+        given_api_key=request.args.get('api_key', None)
+
+        if given_api_key and given_api_key==config['api_write_key']:
+            return Ok("Only read mode awhile")
         else:
             return No_api_key()
 
